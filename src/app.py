@@ -32,9 +32,14 @@ for num_clusters in rango_n_clusters:
 kmeans = KMeans(n_clusters=2)
 kmeans.fit(df_norm)
 
+# hago la prediccion 
+prediccion = kmeans.predict(df_norm)
+
 df2=escalador.inverse_transform(df_norm)
 
 df2=pd.DataFrame(df2,columns=['MedInc','Latitude','Longitude'])
 
 df2['Cluster'] = kmeans.labels_
 
+# guardo el dataset nuevo
+df2.to_csv('../data/processed/df_final.csv', index = False)
